@@ -7,16 +7,16 @@
   Synopsis    [Functions to initialize and shut down the DD manager.]
 
   Description [External procedures included in this module:
-		<ul>
-		<li> Cudd_Init()
-		<li> Cudd_Quit()
-		</ul>
-	       Internal procedures included in this module:
-		<ul>
-		<li> cuddZddInitUniv()
-		<li> cuddZddFreeUniv()
-		</ul>
-	      ]
+                <ul>
+                <li> Cudd_Init()
+                <li> Cudd_Quit()
+                </ul>
+               Internal procedures included in this module:
+                <ul>
+                <li> cuddZddInitUniv()
+                <li> cuddZddFreeUniv()
+                </ul>
+              ]
 
   SeeAlso     []
 
@@ -134,15 +134,15 @@ Cudd_Init(
     DD_OOMFP saveHandler;
 
     if (maxMemory == 0) {
-	maxMemory = getSoftDataLimit();
+        maxMemory = getSoftDataLimit();
     }
     looseUpTo = (unsigned int) ((maxMemory / sizeof(DdNode)) /
-				DD_MAX_LOOSE_FRACTION);
+                                DD_MAX_LOOSE_FRACTION);
     unique = cuddInitTable(numVars,numVarsZ,numSlots,looseUpTo);
     if (unique == NULL) return(NULL);
     unique->maxmem = (unsigned long) maxMemory / 10 * 9;
     maxCacheSize = (unsigned int) ((maxMemory / sizeof(DdCache)) /
-				   DD_MAX_CACHE_FRACTION);
+                                   DD_MAX_CACHE_FRACTION);
     result = cuddInitCache(unique,cacheSize,maxCacheSize);
     if (result == 0) return(NULL);
 
@@ -151,7 +151,7 @@ Cudd_Init(
     unique->stash = ALLOC(char,(maxMemory / DD_STASH_FRACTION) + 4);
     MMoutOfMemory = saveHandler;
     if (unique->stash == NULL) {
-	(void) fprintf(unique->err,"Unable to set aside memory\n");
+        (void) fprintf(unique->err,"Unable to set aside memory\n");
     }
 
     /* Initialize constants. */
@@ -163,9 +163,9 @@ Cudd_Init(
     cuddRef(unique->zero);
 #ifdef HAVE_IEEE_754
     if (DD_PLUS_INF_VAL != DD_PLUS_INF_VAL * 3 ||
-	DD_PLUS_INF_VAL != DD_PLUS_INF_VAL / 3) {
-	(void) fprintf(unique->err,"Warning: Crippled infinite values\n");
-	(void) fprintf(unique->err,"Recompile without -DHAVE_IEEE_754\n");
+        DD_PLUS_INF_VAL != DD_PLUS_INF_VAL / 3) {
+        (void) fprintf(unique->err,"Warning: Crippled infinite values\n");
+        (void) fprintf(unique->err,"Recompile without -DHAVE_IEEE_754\n");
     }
 #endif
     unique->plusinfinity = cuddUniqueConst(unique,DD_PLUS_INF_VAL);
@@ -182,17 +182,17 @@ Cudd_Init(
     /* Create the projection functions. */
     unique->vars = ALLOC(DdNodePtr,unique->maxSize);
     if (unique->vars == NULL) {
-	unique->errorCode = CUDD_MEMORY_OUT;
-	return(NULL);
+        unique->errorCode = CUDD_MEMORY_OUT;
+        return(NULL);
     }
     for (i = 0; i < unique->size; i++) {
-	unique->vars[i] = cuddUniqueInter(unique,i,one,zero);
-	if (unique->vars[i] == NULL) return(0);
-	cuddRef(unique->vars[i]);
+        unique->vars[i] = cuddUniqueInter(unique,i,one,zero);
+        if (unique->vars[i] == NULL) return(0);
+        cuddRef(unique->vars[i]);
     }
 
     if (unique->sizeZ)
-	cuddZddInitUniv(unique);
+        cuddZddInitUniv(unique);
 
     unique->memused += sizeof(DdNode *) * unique->maxSize;
 
@@ -245,29 +245,29 @@ int
 cuddZddInitUniv(
   DdManager * zdd)
 {
-    DdNode	*p, *res;
-    int		i;
+    DdNode      *p, *res;
+    int         i;
 
     zdd->univ = ALLOC(DdNodePtr, zdd->sizeZ);
     if (zdd->univ == NULL) {
-	zdd->errorCode = CUDD_MEMORY_OUT;
-	return(0);
+        zdd->errorCode = CUDD_MEMORY_OUT;
+        return(0);
     }
 
     res = DD_ONE(zdd);
     cuddRef(res);
     for (i = zdd->sizeZ - 1; i >= 0; i--) {
-	unsigned int index = zdd->invpermZ[i];
-	p = res;
-	res = cuddUniqueInterZdd(zdd, index, p, p);
-	if (res == NULL) {
-	    Cudd_RecursiveDerefZdd(zdd,p);
-	    FREE(zdd->univ);
-	    return(0);
-	}
-	cuddRef(res);
-	cuddDeref(p);
-	zdd->univ[i] = res;
+        unsigned int index = zdd->invpermZ[i];
+        p = res;
+        res = cuddUniqueInterZdd(zdd, index, p, p);
+        if (res == NULL) {
+            Cudd_RecursiveDerefZdd(zdd,p);
+            FREE(zdd->univ);
+            return(0);
+        }
+        cuddRef(res);
+        cuddDeref(p);
+        zdd->univ[i] = res;
     }
 
 #ifdef DD_VERBOSE
@@ -295,8 +295,8 @@ cuddZddFreeUniv(
   DdManager * zdd)
 {
     if (zdd->univ) {
-	Cudd_RecursiveDerefZdd(zdd, zdd->univ[0]);
-	FREE(zdd->univ);
+        Cudd_RecursiveDerefZdd(zdd, zdd->univ[0]);
+        FREE(zdd->univ);
     }
 
 } /* end of cuddZddFreeUniv */
