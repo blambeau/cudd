@@ -3,6 +3,7 @@
 *.so
 include
 nanotrav/nanotrav
+nanotrav/*.tst
 cudd/testcudd
 mnemosyne/mnem.dat
 mnemosyne/mnem.syms
