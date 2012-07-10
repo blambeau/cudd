@@ -1,0 +1,14 @@
+*.o
+*.a
+*.so
+include
+nanotrav/nanotrav
+cudd/testcudd
+mnemosyne/mnem.dat
+mnemosyne/mnem.syms
+mnemosyne/mnemalyse
+mnemosyne/mtest
+dddmp/libdddmp.b
+obj/testobj
+dddmp/testdddmp
+mtr/testmtr
