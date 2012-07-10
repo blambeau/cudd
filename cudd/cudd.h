@@ -87,30 +87,30 @@ extern "C" {
 #define CUDD_TRUE 1
 #define CUDD_FALSE 0
 
-#define CUDD_VALUE_TYPE		double
-#define CUDD_OUT_OF_MEM		-1
+#define CUDD_VALUE_TYPE         double
+#define CUDD_OUT_OF_MEM         -1
 /* The sizes of the subtables and the cache must be powers of two. */
-#define CUDD_UNIQUE_SLOTS	256	/* initial size of subtables */
-#define CUDD_CACHE_SLOTS	262144	/* default size of the cache */
+#define CUDD_UNIQUE_SLOTS       256     /* initial size of subtables */
+#define CUDD_CACHE_SLOTS        262144  /* default size of the cache */
 
 /* Constants for residue functions. */
-#define CUDD_RESIDUE_DEFAULT	0
-#define CUDD_RESIDUE_MSB	1
-#define CUDD_RESIDUE_TC		2
+#define CUDD_RESIDUE_DEFAULT    0
+#define CUDD_RESIDUE_MSB        1
+#define CUDD_RESIDUE_TC         2
 
 /* CUDD_MAXINDEX is defined in such a way that on 32-bit and 64-bit
 ** machines one can cast an index to (int) without generating a negative
 ** number.
 */
 #if SIZEOF_VOID_P == 8 && SIZEOF_INT == 4
-#define CUDD_MAXINDEX		(((DdHalfWord) ~0) >> 1)
+#define CUDD_MAXINDEX           (((DdHalfWord) ~0) >> 1)
 #else
-#define CUDD_MAXINDEX		((DdHalfWord) ~0)
+#define CUDD_MAXINDEX           ((DdHalfWord) ~0)
 #endif
 
 /* CUDD_CONST_INDEX is the index of constant nodes.  Currently this
 ** is a synonim for CUDD_MAXINDEX. */
-#define CUDD_CONST_INDEX	CUDD_MAXINDEX
+#define CUDD_CONST_INDEX        CUDD_MAXINDEX
 
 /* These constants define the digits used in the representation of
 ** arbitrary precision integers.  The configurations tested use 8, 16,
@@ -118,15 +118,15 @@ extern "C" {
 ** with these definitions.
 */
 #if SIZEOF_LONG == 8
-#define DD_APA_BITS	32
-#define DD_APA_BASE	(1L << DD_APA_BITS)
-#define DD_APA_HEXPRINT	"%08x"
+#define DD_APA_BITS     32
+#define DD_APA_BASE     (1L << DD_APA_BITS)
+#define DD_APA_HEXPRINT "%08x"
 #else
-#define DD_APA_BITS	16
-#define DD_APA_BASE	(1 << DD_APA_BITS)
-#define DD_APA_HEXPRINT	"%04x"
+#define DD_APA_BITS     16
+#define DD_APA_BASE     (1 << DD_APA_BITS)
+#define DD_APA_HEXPRINT "%04x"
 #endif
-#define DD_APA_MASK	(DD_APA_BASE - 1)
+#define DD_APA_MASK     (DD_APA_BASE - 1)
 
 /*---------------------------------------------------------------------------*/
 /* Stucture declarations                                                     */
@@ -269,11 +269,11 @@ typedef struct DdChildren {
 /* The DdNode structure is the only one exported out of the package */
 struct DdNode {
     DdHalfWord index;
-    DdHalfWord ref;		/* reference count */
-    DdNode *next;		/* next pointer for unique table */
+    DdHalfWord ref;             /* reference count */
+    DdNode *next;               /* next pointer for unique table */
     union {
-	CUDD_VALUE_TYPE value;	/* for constant nodes */
-	DdChildren kids;	/* for internal nodes */
+        CUDD_VALUE_TYPE value;  /* for constant nodes */
+        DdChildren kids;        /* for internal nodes */
     } type;
 };
 
@@ -299,7 +299,7 @@ typedef struct DdTlcInfo DdTlcInfo;
 typedef int (*DD_HFP)(DdManager *, const char *, void *);
 /* Type of priority function */
 typedef DdNode * (*DD_PRFP)(DdManager * , int, DdNode **, DdNode **,
-			    DdNode **);
+                            DdNode **);
 /* Type of apply operator. */
 typedef DdNode * (*DD_AOP)(DdManager *, DdNode **, DdNode **);
 /* Type of monadic apply operator. */
@@ -409,7 +409,7 @@ typedef int (*DD_QSFP)(const void *, const void *);
   SeeAlso      [Cudd_Regular Cudd_Complement]
 
 ******************************************************************************/
-#define Cudd_IsComplement(node)	((int) ((long) (node) & 01))
+#define Cudd_IsComplement(node) ((int) ((long) (node) & 01))
 
 
 /**Macro***********************************************************************
@@ -505,8 +505,8 @@ typedef int (*DD_QSFP)(const void *, const void *);
 ******************************************************************************/
 #define Cudd_ForeachCube(manager, f, gen, cube, value)\
     for((gen) = Cudd_FirstCube(manager, f, &cube, &value);\
-	Cudd_IsGenEmpty(gen) ? Cudd_GenFree(gen) : CUDD_TRUE;\
-	(void) Cudd_NextCube(gen, &cube, &value))
+        Cudd_IsGenEmpty(gen) ? Cudd_GenFree(gen) : CUDD_TRUE;\
+        (void) Cudd_NextCube(gen, &cube, &value))
 
 
 /**Macro***********************************************************************
@@ -537,8 +537,8 @@ typedef int (*DD_QSFP)(const void *, const void *);
 ******************************************************************************/
 #define Cudd_ForeachPrime(manager, l, u, gen, cube)\
     for((gen) = Cudd_FirstPrime(manager, l, u, &cube);\
-	Cudd_IsGenEmpty(gen) ? Cudd_GenFree(gen) : CUDD_TRUE;\
-	(void) Cudd_NextPrime(gen, &cube))
+        Cudd_IsGenEmpty(gen) ? Cudd_GenFree(gen) : CUDD_TRUE;\
+        (void) Cudd_NextPrime(gen, &cube))
 
 
 /**Macro***********************************************************************
@@ -571,8 +571,8 @@ typedef int (*DD_QSFP)(const void *, const void *);
 ******************************************************************************/
 #define Cudd_ForeachNode(manager, f, gen, node)\
     for((gen) = Cudd_FirstNode(manager, f, &node);\
-	Cudd_IsGenEmpty(gen) ? Cudd_GenFree(gen) : CUDD_TRUE;\
-	(void) Cudd_NextNode(gen, &node))
+        Cudd_IsGenEmpty(gen) ? Cudd_GenFree(gen) : CUDD_TRUE;\
+        (void) Cudd_NextNode(gen, &node))
 
 
 /**Macro***********************************************************************
@@ -605,8 +605,8 @@ typedef int (*DD_QSFP)(const void *, const void *);
 ******************************************************************************/
 #define Cudd_zddForeachPath(manager, f, gen, path)\
     for((gen) = Cudd_zddFirstPath(manager, f, &path);\
-	Cudd_IsGenEmpty(gen) ? Cudd_GenFree(gen) : CUDD_TRUE;\
-	(void) Cudd_zddNextPath(gen, &path))
+        Cudd_IsGenEmpty(gen) ? Cudd_GenFree(gen) : CUDD_TRUE;\
+        (void) Cudd_zddNextPath(gen, &path))
 
 
 
@@ -835,7 +835,7 @@ extern int Cudd_bddVarIsDependent (DdManager *dd, DdNode *f, DdNode *var);
 extern double Cudd_bddCorrelation (DdManager *manager, DdNode *f, DdNode *g);
 extern double Cudd_bddCorrelationWeights (DdManager *manager, DdNode *f, DdNode *g, double *prob);
 extern DdNode * Cudd_bddIte (DdManager *dd, DdNode *f, DdNode *g, DdNode *h);
-  extern DdNode * Cudd_bddIteLimit (DdManager *dd, DdNode *f, DdNode *g, DdNode *h, unsigned int limit);
+extern DdNode * Cudd_bddIteLimit (DdManager *dd, DdNode *f, DdNode *g, DdNode *h, unsigned int limit);
 extern DdNode * Cudd_bddIteConstant (DdManager *dd, DdNode *f, DdNode *g, DdNode *h);
 extern DdNode * Cudd_bddIntersect (DdManager *dd, DdNode *f, DdNode *g);
 extern DdNode * Cudd_bddAnd (DdManager *dd, DdNode *f, DdNode *g);
@@ -1010,17 +1010,17 @@ extern double Cudd_Density (DdManager *dd, DdNode *f, int nvars);
 extern void Cudd_OutOfMem (long size);
 extern int Cudd_zddCount (DdManager *zdd, DdNode *P);
 extern double Cudd_zddCountDouble (DdManager *zdd, DdNode *P);
-extern DdNode	* Cudd_zddProduct (DdManager *dd, DdNode *f, DdNode *g);
-extern DdNode	* Cudd_zddUnateProduct (DdManager *dd, DdNode *f, DdNode *g);
-extern DdNode	* Cudd_zddWeakDiv (DdManager *dd, DdNode *f, DdNode *g);
-extern DdNode	* Cudd_zddDivide (DdManager *dd, DdNode *f, DdNode *g);
-extern DdNode	* Cudd_zddWeakDivF (DdManager *dd, DdNode *f, DdNode *g);
-extern DdNode	* Cudd_zddDivideF (DdManager *dd, DdNode *f, DdNode *g);
-extern DdNode	* Cudd_zddComplement (DdManager *dd, DdNode *node);
+extern DdNode   * Cudd_zddProduct (DdManager *dd, DdNode *f, DdNode *g);
+extern DdNode   * Cudd_zddUnateProduct (DdManager *dd, DdNode *f, DdNode *g);
+extern DdNode   * Cudd_zddWeakDiv (DdManager *dd, DdNode *f, DdNode *g);
+extern DdNode   * Cudd_zddDivide (DdManager *dd, DdNode *f, DdNode *g);
+extern DdNode   * Cudd_zddWeakDivF (DdManager *dd, DdNode *f, DdNode *g);
+extern DdNode   * Cudd_zddDivideF (DdManager *dd, DdNode *f, DdNode *g);
+extern DdNode   * Cudd_zddComplement (DdManager *dd, DdNode *node);
 extern MtrNode * Cudd_MakeZddTreeNode (DdManager *dd, unsigned int low, unsigned int size, unsigned int type);
-extern DdNode	* Cudd_zddIsop (DdManager *dd, DdNode *L, DdNode *U, DdNode **zdd_I);
-extern DdNode	* Cudd_bddIsop (DdManager *dd, DdNode *L, DdNode *U);
-extern DdNode	* Cudd_MakeBddFromZddCover (DdManager *dd, DdNode *node);
+extern DdNode   * Cudd_zddIsop (DdManager *dd, DdNode *L, DdNode *U, DdNode **zdd_I);
+extern DdNode   * Cudd_bddIsop (DdManager *dd, DdNode *L, DdNode *U);
+extern DdNode   * Cudd_MakeBddFromZddCover (DdManager *dd, DdNode *node);
 extern int Cudd_zddDagSize (DdNode *p_node);
 extern double Cudd_zddCountMinterm (DdManager *zdd, DdNode *node, int path);
 extern void Cudd_zddPrintSubtable (DdManager *table);
