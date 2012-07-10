@@ -12,6 +12,7 @@
                 <li> Cudd_bddIteLimit()
                 <li> Cudd_bddIteConstant()
                 <li> Cudd_bddIntersect()
+                <li> Cudd_bddNot()
                 <li> Cudd_bddAnd()
                 <li> Cudd_bddAndLimit()
                 <li> Cudd_bddOr()
@@ -330,6 +331,33 @@ Cudd_bddIntersect(
     return(res);
 
 } /* end of Cudd_bddIntersect */
+
+
+/**Function********************************************************************
+
+  Synopsis    [Computes the negation of a BDD f.]
+
+  Description [Computes the negation of a BDD f. Returns a pointer to the
+  resulting BDD. Note that, the Cudd_Not macro is more efficient choice, but
+  only available in static linking.]
+
+  SideEffects [None]
+
+  SeeAlso     [Cudd_bddIte Cudd_addApply Cudd_bddAndAbstract Cudd_bddIntersect
+  Cudd_bddAnd Cudd_bddOr Cudd_bddNand Cudd_bddNor Cudd_bddXor Cudd_bddXnor]
+
+******************************************************************************/
+DdNode *
+Cudd_bddNot(
+  DdManager * dd,
+  DdNode * f)
+{
+    DdNode *res;
+
+    res = Cudd_Not(f);
+    return(res);
+
+} /* end of Cudd_bddNot */
 
 
 /**Function********************************************************************
