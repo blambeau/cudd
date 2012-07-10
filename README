@@ -27,61 +27,61 @@ on some machines you can build a "fast" version of the program by typing:
 The Makefile supports several targets:
 
     make:
-	Creates a "plain" version of the program.
+        Creates a "plain" version of the program.
 
     make testdddmp:
-	Builds a test program (testdddmp) for BDD loading from and
-	storing to disk. See file README.test in the dddmp directory for
-	how to run the program.
+        Builds a test program (testdddmp) for BDD loading from and
+        storing to disk. See file README.test in the dddmp directory for
+        how to run the program.
 
     make testobj:
-	Builds a test program for the C++ interface. Requires a C++
-	compiler. To run the program, run obj/testobj.
+        Builds a test program for the C++ interface. Requires a C++
+        compiler. To run the program, run obj/testobj.
 
     make testcudd:
-	Builds a test program for CUDD. To run the program, go to the
-	cudd directory and type "./testcudd -p 2 r7x8.1.mat". The result
-	can be compared to r7x7.1.out.
+        Builds a test program for CUDD. To run the program, go to the
+        cudd directory and type "./testcudd -p 2 r7x8.1.mat". The result
+        can be compared to r7x7.1.out.
 
     make testmtr:
         Builds a test program for the mtr package.  To run the program,
-	go to the mtr directory and type "./testmtr -p 1 test.groups".
-    
+        go to the mtr directory and type "./testmtr -p 1 test.groups".
+
     make clean:
-	Cleans directories, but leaves libraries and programs.
+        Cleans directories, but leaves libraries and programs.
 
     make distclean:
-	Cleans thoroughly, returning the directories to their pristine
-	state.
+        Cleans thoroughly, returning the directories to their pristine
+        state.
 
 The following targets are more or less obsolete and may disappear or
 change in the future.
 
     make check_leaks: 
-	Creates a version of the program with the mnemosyne library
-	linked to it. It also builds the mnemalyse program, which
-	helps in finding memory leaks. This target does not work on the
-	IBM RS6000. The makefile also supports purify. To use purify,
-	set the PURE variable in the Makefile, and use the standard
-	target.
+        Creates a version of the program with the mnemosyne library
+        linked to it. It also builds the mnemalyse program, which
+        helps in finding memory leaks. This target does not work on the
+        IBM RS6000. The makefile also supports purify. To use purify,
+        set the PURE variable in the Makefile, and use the standard
+        target.
 
     make optimize_dec:
-	Builds a version of the program using the u-code compiler
-	available on DEC machines (DECstations and Alphas). The newer
-	native compiler on the Alphas does not use u-code, though.
-	Therefore the standard target should be used with it.
+        Builds a version of the program using the u-code compiler
+        available on DEC machines (DECstations and Alphas). The newer
+        native compiler on the Alphas does not use u-code, though.
+        Therefore the standard target should be used with it.
 
     make lint:
-	Runs lint on all subdirectories except mnemosyne. Creates lint
-	libraries for all object libraries.
+        Runs lint on all subdirectories except mnemosyne. Creates lint
+        libraries for all object libraries.
 
     make tags:
-	Builds ctags-style tag files for all subdirectories except
-	mnemosyne.
+        Builds ctags-style tag files for all subdirectories except
+        mnemosyne.
 
     make all:
-	Makes all of the above, except check_leaks, which is
-	incompatible with a plain "make."
+        Makes all of the above, except check_leaks, which is
+        incompatible with a plain "make."
 
 All targets, except clean and distclean, will create the include
 directory if it does not already exist.
