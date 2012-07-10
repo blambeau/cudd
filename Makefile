@@ -75,7 +75,14 @@ XCFLAGS	= -mtune=native -malign-double -DHAVE_IEEE_754 -DBSD
 # Gcc on ia64.
 #XCFLAGS	= -DHAVE_IEEE_754 -DBSD -DSIZEOF_VOID_P=8 -DSIZEOF_LONG=8
 # Icc/ecc on ia64.
-#XCFLAGS = -ansi -DBSD -DHAVE_IEEE_754 -DSIZEOF_VOID_P=8 -DSIZEOF_LONG=8
+#XCFLAGS	= -ansi -DBSD -DHAVE_IEEE_754 -DSIZEOF_VOID_P=8 -DSIZEOF_LONG=8
+#
+#==========================
+#  MacOsX
+# Gcc 4.2.6 or higher
+#XCFLAGS	= -mtune=native -DHAVE_IEEE_754
+# Gcc 4.2.6 or higher (64-bit compilation)
+#XCFLAGS	= -mtune=native -DHAVE_IEEE_754 -DSIZEOF_VOID_P=8 -DSIZEOF_LONG=8
 #
 #==========================
 #  Solaris
